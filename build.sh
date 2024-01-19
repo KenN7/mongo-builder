@@ -1,3 +1,4 @@
+#!/bin/bash
 set -euxo pipefail
 
 # Set the makedeb release you want.
