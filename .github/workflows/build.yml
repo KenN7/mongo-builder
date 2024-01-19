@@ -30,3 +30,11 @@ jobs:
       # Runs build.sh script
       - name: Run build script
         run: ./build.sh
+
+      # upload artifact
+      - name: Upload the artifacts
+        uses: skx/github-action-publish-binaries@master
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            args: '*.deb'

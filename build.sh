@@ -16,10 +16,15 @@ cd mongo-c/
 makedeb -s PKGBUILD
 
 sudo dpkg --install *.deb
+cp *.deb $original_dir
+
 # return to the original directory
 cd "$original_dir"
 
 # build mongo-cxx
 cd mongo-cxx/
 makedeb -s PKGBUILD
+cp *.deb $original_dir
 
+# return to the original directory
+cd "$original_dir"
