@@ -1,0 +1,36 @@
+# Maintainer: 
+# Contributors:
+
+pkgname=mongo-c-driver
+pkgver=1.25.4
+pkgrel=1
+pkgdesc="C driver for MongoDB and libbson"
+arch=('i686' 'x86_64')
+url="http://mongocxx.org/"
+license=("Apache")
+depends=()
+makedepends=(cmake gcc)
+provides=(libbson-1.0-0 libmongoc-1.0-0)
+conflicts=(libbson-1.0-0 libmongoc-1.0-0)
+source=(https://github.com/mongodb/mongo-c-driver/archive/refs/tags/${pkgver}.tar.gz)
+sha256sums=('SKIP')
+
+build() {
+    cd "${pkgname}-$pkgver/build/"
+    cmake \
+       -D CMAKE_BUILD_TYPE=Release \
+       -D CMAKE_INSTALL_PREFIX=/usr/ \
+       -D ENABLE_EXTRA_ALIGNMENT=OFF \
+       -D ENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF \
+       -D CMAKE_BUILD_TYPE=RelWithDebInfo \
+       -D BUILD_VERSION="${pkgver}" \
+       -D ENABLE_MONGOC=ON \
+       ..
+    cmake --build . --config RelWithDebInfo --parallel
+}
+
+package() {
+    cd "${pkgname}-$pkgver/build/"
+    cmake --install . --prefix "$pkgdir/usr/" --config RelWithDebInfo
+}
+
