@@ -31,10 +31,23 @@ jobs:
       - name: Run build script
         run: ./build.sh
 
+      # Create a release
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
       # upload artifact
       - name: Upload the artifacts
         uses: AButler/upload-release-assets@v3.0
         with:
           files: "*.deb"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          release-id: ${{ github.ref }}
+          release-id: ${{ steps.create_release.outputs.id }}
+
