@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
 
-export TERM=bash
+export TERM=xterm
 
 # Set the makedeb release you want.
 export MAKEDEB_RELEASE='makedeb'
