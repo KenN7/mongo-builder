@@ -15,6 +15,7 @@ original_dir=$(pwd)
 cd mongo-c/
 makedeb -s PKGBUILD
 
+sudo dpkg --install *.deb
 # return to the original directory
 cd "$original_dir"
 
