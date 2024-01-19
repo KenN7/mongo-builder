@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euxo pipefail
 
+export TERM="dumb"
+
 # Set the makedeb release you want.
 export MAKEDEB_RELEASE='makedeb'
 
